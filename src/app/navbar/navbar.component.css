@@ -1,0 +1,11 @@
+.navbar-nav{
+  padding-bottom: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.top{
+  background-color: #F5C6AA;
+}
+.botom{
+  background-color: #F5C6AA;
+}
