@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { from } from 'rxjs';
 import { RepositoryService } from '../services/repository.service';
-import { User } from '../models/user';
-import { UserService } from '../services/user.service';
 import { Repo } from '../models/repo';
-
-
-
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-repository',
@@ -17,29 +14,26 @@ import { Repo } from '../models/repo';
 })
 export class RepositoryComponent implements OnInit {
 
-
   Users!: User; 
-  Repo : Repo []=[]
-
-  constructor(   public userHttpService:UserService) { 
+  Repository:Repo[]=[]
+  constructor(public userService:UserService) { 
 
   }
 
-  ngOnInit(): {
-    this.searchUser("ErastusNjaramba")
+  ngOnInit() {
+    this.searchGit("ErastusNjaramba")
   }
-searchUser(searchTerm: string){
-  this.userHttpService.searchUser(searchTerm).then(
+searchGit(searchTerm: string){
+  this.userService.searchGit(searchTerm).then(
     (success)=>{
-      this.Users = this.userHttpService.Users;
+      this.Users = this.userService.Users;
     },
     (error)=>{
       console.log(error)
     })
-    this.userHttpService.searchRepo(searchTerm).then(
-            (success)=>{
-            this.Repo=this.userHttpService.Repos
-
+    this.userService.searchRepository(searchTerm).then(
+      (success)=>{
+        this.Repository=this.userService.Repository
 
 
     })
