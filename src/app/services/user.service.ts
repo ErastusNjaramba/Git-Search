@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 import { Repo } from '../models/repo';
-import { resolve } from 'dns';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  searchUsers(searchTerm: string){
+  searchGits(searchTerm: string){
     throw new Error('Method not implemented.');
 
   }
 
   Users!: User; 
-  Repo : Repo []=[]
+  Repository : Repo []=[]
   constructor(private http:HttpClient) { }
-  searchUser(searchTerm: string){
+  searchGit(searchTerm: string){
   interface userInterface{
     login:string,
     avatar_url:any,
@@ -29,7 +28,7 @@ export class UserService {
   }
   let userUrl = "https://api.github.com/users/"+searchTerm;
 
-  let promise = new Promise((resolve,reject))=>{
+  let promise = new Promise((resolve,reject)=>{
     this.http.get<userInterface>(userUrl).toPromise().then(
       (result)=>{
         
@@ -43,10 +42,10 @@ export class UserService {
         reject()
       }
     )
-  }
+  })
   return promise
 }
-searchRepos(searchTerm:string){
+searchRepository(searchTerm:string){
   interface repoInterface{
     name:string,
     description:string,
@@ -58,10 +57,10 @@ searchRepos(searchTerm:string){
     this.http.get<repoInterface[]>(userUrl).toPromise().then(
       (results)=>{
 
-        this.Repo= [];
+        this.Repository= [];
         for (let i=0; i<results.length;i++){
           let repo = new Repo(results[i].name,results[i].description,results[i].created_at,)
-          this.Repo.push(repo);
+          this.Repository.push(repo);
         }
         console.log(results);
         resolve(results)
