@@ -1,1 +1,5 @@
-<p>search works!</p>
+<div class="search">
+  <form (ngSubmit)='search($event)' #userForm='ngForm'>
+      <input placeholder="SEARCH USER..." class="form-control" name ="searchTerm" [(ngModel)]="searchTerm" (keyup)="search($event)">
+  </form>
+</div>
