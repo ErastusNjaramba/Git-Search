@@ -1,29 +1,16 @@
-<div class="container-fluid">
-  <div class="">
-      <h2>User Searcher!</h2>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <form class="form-group">
-        <input class = "form-control" placeholder="Enter Username" [(ngModel)] = "userName" name = "userName" (keyup) = userLookup()>
-        <button type="reset" class="btn btn-info">Clear</button>
-      </form>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <img [src]="user.avatar">
-      </div>
-      <div class="col-md-8">
-        <div class="output card">
-          <h3 appHighlight><strong>{{user.username}}</strong></h3>
-          <h6><strong>Bio: </strong> <em>{{user.bio}}</em></h6>
-          <h6><strong>Name: </strong> <em>{{user.name}}</em></h6>
-          <h6><strong>Repositories: </strong> <em>{{user.repositories}}</em></h6>
-          <h6><strong>Followers: </strong> <em>{{user.followers}}</em></h6>
-          <h6><strong>Following: </strong> <em>{{user.following}}</em></h6>
-          <button class="btn btn-warning"><a [href]="user.link">Visit GitHub Page</a></button>
-        </div>
-      </div>
-    </div>
-  </div>
+<app-search (emitSearch)="searchGit($event)"></app-search><br>
+<div class="avatar">
+<img src="{{Users.avatar_url}}" alt="profile pic" height="100px" width="100px">
+                <p>Username: <strong>{{Users.login}}</strong></p>
+                <p>Followers: <strong>{{Users.followers}}</strong></p>
+                <p>Following: <strong>{{Users.followers}}</strong></p>
+                <p>Public Repositories: <strong>{{Users.public_repos}}</strong></p>
+                <p>Location: <strong>{{Users.location}}</strong></p>
 </div>
+        <div *ngIf='Repos' class="repo">
+                  <div *ngFor='let repo of Repos'>
+                        <h3>{{repo.name}}</h3>
+                        <p> {{repo.description}} </p>
+                        <p> {{repo.created_at | date}}</p>
+                    </div>
+                </div>
